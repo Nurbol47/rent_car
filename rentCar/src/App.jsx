@@ -1,9 +1,9 @@
 import "./App.css";
-import Home from "./pages/Home";
+import Header from "./componants/header/header";
 
 function App() {
   return (<>
-  <Home/>
+  <Header/>
   </>);
 }
 
