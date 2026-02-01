@@ -1,3 +1,9 @@
-from django.db import models
+# from django.db import models
 
-# Create your models here.
+
+# class MenuItem(models.Model):
+#     logo = models.ImageField('Логотип', upload_to='logo/')
+
+
+# class HeaderContact(models.Model):
+
