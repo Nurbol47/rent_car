@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
 
+
 @admin.register(CarWashOption)
 class CarWishOptionAdmin(admin.ModelAdmin):
     list_display = ['price_wash']
@@ -10,6 +11,7 @@ class CarWishOptionAdmin(admin.ModelAdmin):
 class CarAdmin(admin.ModelAdmin):
     list_dispaly = ['name']
 
-# @admin.register(BookCar)
-# class BookCarAdmin(admin.ModelAdmin):
-#     list_display = ['']
+
+@admin.register(BookCar)
+class BookCarAdmin(admin.ModelAdmin):
+    list_display = ['car']

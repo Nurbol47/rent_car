@@ -19,5 +19,6 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('swagger/', login_required(schema_view.with_ui('swagger', cache_timeout=0)), name='schema_swagger_ui'),
-    path('', include('apps.car.urls')),
+    path('prices/', include('apps.price.urls')),
+    path('cars/', include('apps.car.urls')),
 ]
