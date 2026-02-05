@@ -1,6 +1,5 @@
 import BackgroundSlider from "../backgroundSlider/backgroundSlider"
 import BookingForm from "../bookingForm/bookingForm"
-import Header from "../header/header"
 import SliderControls from "../sliderControls/sliderControls"
 import { useState } from "react";
 import "./style.css"
@@ -11,7 +10,6 @@ export default function Hero() {
     return (
         <>
        <div className="home-page">
-        <Header />
 
         <div className="fon">
           <BackgroundSlider currentSlide={currentSlide} />
