@@ -1,0 +1,134 @@
+.form {
+  width: 420px;
+  height: 750px;
+  background: #20315073;
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  color: #ffff;
+  text-align: center;
+  padding: 30px;
+  z-index: 3;
+  h1 {
+    font-family: Inter Tight;
+    font-weight: 600;
+    font-size: 28px;
+    line-height: 35px;
+    letter-spacing: -1%;
+  }
+  h2 {
+    font-family: Inter Tight;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: -1%;
+    margin: 25px 0 15px;
+  }
+  select {
+    font-family: Inter Tight;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: -1%;
+    color: #ffff;
+    background: none;
+    padding: 11px 60px;
+    border-radius: 12px;
+    border: 1.4px solid white;
+    margin: 15px 0;
+  }
+  h6 {
+    font-family: Inter Tight;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: -1%;
+    margin-bottom: 15px;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .icon1 {
+    width: 30px;
+    height: 30px;
+    margin-left: -185px;
+    margin-top: -15px;
+  }
+
+  input {
+    background: none;
+    border: none;
+    color: #ffff;
+    font-family: Inter Tight;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    line-height: 35px;
+    text-align: center;
+  }
+
+  h3 {
+    font-family: Inter Tight;
+    font-weight: 700;
+    font-style: Bold;
+    font-size: 28px;
+    line-height: 35px;
+    letter-spacing: -1%;
+    margin-top: 25px;
+  }
+
+  button {
+    font-family: Inter Tight;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    color: #ffff;
+    line-height: 22px;
+    letter-spacing: -1%;
+    background: var(--buttons, #266ff5);
+    padding: 20px 31px;
+    border-radius: 15px;
+    border: none;
+    margin-top: 25px;
+  }
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+input[type="radio"] {
+  accent-color: #266ff5;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+}
+
+input[type="checkbox"] {
+  accent-color: #266ff5;
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+}
+
+.inputDate {
+  padding: 10px 10px;
+  border: 1.4px solid #ffff;
+  border-radius: 15px;
+}
+.inputDate1 {
+  padding: 10px 20px;
+  border: 1.4px solid #ffff;
+  border-radius: 15px;
+}
+
+.icon2 {
+  width: 24px;
+  height: 24px;
+}

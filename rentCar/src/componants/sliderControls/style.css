@@ -1,0 +1,23 @@
+.slider-controls {
+  position: absolute;
+  left: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+  background: #20315073;
+  backdrop-filter: blur(15px);
+  padding: 10px;
+  border-radius: 1000px;
+  
+}
+
+.slider-controls button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: white;
+  cursor: pointer;
+}

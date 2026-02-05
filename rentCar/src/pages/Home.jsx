@@ -1,10 +1,14 @@
-import Header from "../componants/header/header";
+import "./Home.css";
 
-export default function Home() {
-    return (
-        <>
+import Hero from "../componants/hero/hero";
 
-        <Header/>
-        </>
-    )
+function Home() {
+
+  return (
+    <>
+    <Hero/>
+    </>
+  );
 }
+
+export default Home;

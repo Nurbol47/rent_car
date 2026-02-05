@@ -1,0 +1,22 @@
+.background-slider {
+  position: absolute;
+  width: 100%;
+  height: 1024px;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.slider-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  border-radius: 0 0 30px 30px;
+}
+
+.slider-image.active {
+  opacity: 1;
+}

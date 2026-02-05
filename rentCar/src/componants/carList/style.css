@@ -1,0 +1,120 @@
+/* Основной контейнер списка автомобилей */
+.cars-list {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cars-list h2 {
+  font-size: 32px;
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Контейнер для карточек */
+.cars-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Стили для состояния загрузки */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: white;
+  font-size: 18px;
+  gap: 20px;
+}
+
+/* Спиннер загрузки */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #3498db;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Стили для состояния ошибки */
+.error {
+  background: rgba(231, 76, 60, 0.1);
+  border: 2px solid #e74c3c;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.error p {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.error button {
+  background: #e74c3c;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.error button:hover {
+  background: #c0392b;
+}
+
+/* Адаптивность для разных экранов */
+@media (max-width: 768px) {
+  .cars-list h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  
+  .cars-container {
+    gap: 15px;
+    padding: 0 10px;
+  }
+  
+  .loading {
+    min-height: 200px;
+    font-size: 16px;
+  }
+  
+  .spinner {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cars-list h2 {
+    font-size: 22px;
+  }
+  
+  .error {
+    padding: 20px;
+  }
+  
+  .error p {
+    font-size: 16px;
+  }
+}
