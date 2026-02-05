@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'apps.main',
     'apps.price',
     'apps.car',
+    'apps.location',
 ]
 
 MIDDLEWARE = [
