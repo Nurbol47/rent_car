@@ -1,0 +1,59 @@
+.route-detail-page {
+  padding: 40px 20px;
+  background-color: #f8fafc; 
+  min-height: 80vh;
+}
+.route-detail-page{
+    font-family: sans-serif;
+}
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.breadcrumbs {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs a {
+  text-decoration: none;
+  color: #94a3b8;
+  transition: color 0.2s;
+}
+
+.breadcrumbs a:hover {
+  color: #2b7fff;
+}
+
+.breadcrumbs .current {
+  color: #64748b;
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 40px 0;
+  text-transform: capitalize;
+}
+
+.new-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+.placeholder-card {
+  height: 200px;
+  background: white;
+  border-radius: 20px;
+  border: 2px dashed #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+}

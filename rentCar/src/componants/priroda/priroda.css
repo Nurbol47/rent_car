@@ -1,0 +1,90 @@
+/* Общий контейнер секции */
+.routes-wrapper {
+  background-color: #f0f4f8; /* Светло-голубой фон всей страницы */
+  padding-bottom: 60px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Верхний баннер с закруглением */
+.hero-banner {
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
+              url('myimg.png') center/cover no-repeat; /* СЮДА ФОТО МАШИНЫ И ГОР */
+  height: 600px;
+  border-radius:40px; /* Закругление только снизу */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}
+
+.hero-content h1 {
+  font-size: 42px;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.hero-content p {
+  font-size: 18px;
+  margin-bottom: 24px;
+  opacity: 0.9;
+}
+
+.hero-content button {
+  background-color: #2b7fff;
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Сетка карточек с наплывом на баннер */
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: -120px auto 0; /* Отрицательный отступ поднимает карточки наверх */
+  padding: 0 20px;
+}
+
+/* Стиль карточки-ссылки */
+.route-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #333;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.route-card:hover {
+  transform: translateY(-10px);
+}
+
+.route-card img {
+  width: 100%;
+  height: 240px; /* Фиксированная высота как на макете */
+  object-fit: cover;
+  display: block;
+}
+
+.route-card figcaption {
+  padding: 20px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  background: white;
+}
+
+/* Адаптив для мобильных устройств */
+@media (max-width: 992px) {
+  .routes-grid {
+    grid-template-columns: 1fr;
+    margin-top: -50px;
+  }
+  .hero-banner { height: 400px; }
+}

@@ -1,4 +1,5 @@
 import "./Home.css";
+import RoutesSection from "../componants/priroda/priroda";
 import Privileges from "../componants/privileg/privileges";
 import RentSteps from "../componants/navi/navi";
 import TrustSection from "../componants/rentSteps/rentSteps";
@@ -10,6 +11,7 @@ function Home() {
     <>
       <Hero />
       <TrustSection />
+      <RoutesSection/>
       <RentSteps />
       <Privileges />
     </>
