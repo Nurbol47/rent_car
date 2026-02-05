@@ -21,7 +21,6 @@
   flex-direction: column;
 }
 
-/* Левая карточка: изображение фоном */
 .p-left {
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), 
                     url('./limg.png');
@@ -43,7 +42,6 @@
 
 .p-val { font-size: 48px; font-weight: 800; margin-top: 10px; }
 
-/* Правая карточка: синий фон */
 .p-card{
     background-color: #2b7fff;
   color: #fff;
