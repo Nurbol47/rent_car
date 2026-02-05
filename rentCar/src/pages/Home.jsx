@@ -1,10 +1,13 @@
-import Header from "../componants/header/header";
+import Privileges from "../componants/privileg/privileges";
+import RentSteps from "../componants/navi/navi";
+import TrustSection from "../componants/rentSteps/rentSteps";
 
 export default function Home() {
     return (
         <>
-
-        <Header/>
+        <TrustSection/>
+        <RentSteps/>
+        <Privileges/>
         </>
     )
 }
