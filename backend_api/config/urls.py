@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -20,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('swagger/', login_required(schema_view.with_ui('swagger', cache_timeout=0)), name='schema_swagger_ui'),
     path('price/', include('apps.price.urls')),
-    path('car/', include('apps.car.urls')),
+    path('cars/', include('apps.car.urls')),
     path('locations/', include('apps.location.urls')),
-]
+    path('main/', include('apps.main.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

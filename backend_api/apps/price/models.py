@@ -2,8 +2,8 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from apps.car.models import Car
 
-
 class MonthChoices(models.IntegerChoices):
+    """Перечисление месяцев для строгой типизации сезонов"""
     JANUARY = 1, 'Январь'
     FEBRUARY = 2, 'Февраль'
     MARCH = 3, 'Март'
@@ -19,11 +19,15 @@ class MonthChoices(models.IntegerChoices):
 
 
 class Season(models.Model):
-    month_from = models.PositiveSmallIntegerField("От (месяцa)", choices=MonthChoices, default=1)
-    month_to = models.PositiveSmallIntegerField("До (месяцa)", choices=MonthChoices, default=1)
+    """
+    Модель временных интервалов (сезонов). 
+    Используется для автоматического изменения цен в зависимости от времени года.
+    """
+    month_from = models.PositiveSmallIntegerField("С (месяц)", choices=MonthChoices.choices, default=1)
+    month_to = models.PositiveSmallIntegerField("По (месяц)", choices=MonthChoices.choices, default=1)
 
     def __str__(self):
-        return f"{self.get_month_from_display()} - {self.get_month_to_display()}"
+        return f"{self.get_month_from_display()} — {self.get_month_to_display()}"
     
     class Meta:
         verbose_name = "Сезон"
@@ -31,47 +35,59 @@ class Season(models.Model):
 
 
 class ExtraService(models.Model):
+    """
+    Дополнительные услуги (детское кресло, GPS, полная страховка).
+    Поддерживает расчет как за услугу целиком, так и посуточно.
+    """
     title = models.CharField("Название", max_length=150)
     price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
-    max_price = models.DecimalField("Максимальная цена", max_digits=10, decimal_places=2, null=True, blank=True)
-    start_time = models.TimeField("Время начало", null=True, blank=True)
-    end_time = models.TimeField("Время конец", null=True, blank=True)
-    is_per_day = models.BooleanField("За сутки", default=False)
+    max_price = models.DecimalField("Лимит цены", max_digits=10, decimal_places=2, null=True, blank=True)
+    
+    # Временные ограничения для услуг (например, аренда только в рабочее время)
+    start_time = models.TimeField("Время начала", null=True, blank=True)
+    end_time = models.TimeField("Время окончания", null=True, blank=True)
+    
+    is_per_day = models.BooleanField("Расчет посуточно", default=False)
 
     def __str__(self):
         return self.title
     
     def clean(self):
-        super().clean()
+        """Бизнес-валидация стоимостных рамок"""
         if self.max_price and self.max_price < self.price:
-            raise ValidationError({'max_price':"Цена не должна быть меньше основной цены"})
+            raise ValidationError({'max_price': "Максимальный лимит не может быть меньше базовой цены."})
     
     class Meta:
-        verbose_name = "Дополнительная услуга"
-        verbose_name_plural = "Дополнительные услуги"
+        verbose_name = "Доп. услуга"
+        verbose_name_plural = "Доп. услуги"
 
 
 class PricingPlan(models.Model):
+    """
+    Сложная модель ценообразования. 
+    Связывает машину, сезон и длительность аренды для определения стоимости.
+    """
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name="plans", verbose_name="Машина")
-    season = models.ForeignKey(Season, on_delete=models.CASCADE, verbose_name="Сезон")
-    min_day = models.PositiveIntegerField("Минимальный день")
-    max_day = models.PositiveIntegerField("Максимальный день", null=True, blank=True)
-    price_period = models.DecimalField("Цена периода", decimal_places=2, max_digits=15)
-    extra_service = models.ManyToManyField(ExtraService, blank=True)
-    is_active = models.BooleanField("Активна", default=True)
+    season = models.ForeignKey(Season, on_delete=models.CASCADE, related_name="plans", verbose_name="Сезон")
+    
+    min_day = models.PositiveIntegerField("Дней от")
+    max_day = models.PositiveIntegerField("Дней до", null=True, blank=True)
+    
+    price_period = models.DecimalField("Стоимость (в сутки)", decimal_places=2, max_digits=15)
+    extra_service = models.ManyToManyField(ExtraService, blank=True, verbose_name="Включенные услуги")
+    
+    is_active = models.BooleanField("План активен", default=True)
 
     def __str__(self):
-        return str(self.car)
+        return f"{self.car.name} | {self.season} | {self.price_period} руб/день"
     
     def clean(self):
-        super().clean()
-
+        """Проверка логической последовательности дней аренды"""
         if self.max_day and self.max_day <= self.min_day:
-            raise ValidationError({'max_day':"Максимальный день должен быть больше минимального дня"})
+            raise ValidationError({'max_day': "Верхний порог дней должен превышать минимальный."})
     
     class Meta:
-        verbose_name = "План цены"
-        verbose_name_plural = "План цен"
-
-
-
+        verbose_name = "Тарифный план"
+        verbose_name_plural = "Тарифные планы"
+        # Сортировка по минимальному количеству дней для удобства отображения
+        ordering = ['car', 'min_day']

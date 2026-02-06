@@ -1,29 +1,44 @@
 from django.contrib import admin
-from .models import *
-
+from .models import Season, ExtraService, PricingPlan
 
 @admin.register(Season)
 class SeasonAdmin(admin.ModelAdmin):
-    list_display = ['month_from', 'month_to']
+    """Настройка отображения сезонов"""
+    list_display = ['id', 'month_from', 'month_to']
+    list_editable = ['month_from', 'month_to']
 
 
 @admin.register(ExtraService)
 class ExtraServiceAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'max_price', 'start_time', 'end_time', 'is_per_day']
+    """Управление дополнительными услугами"""
+    list_display = ['title', 'price', 'max_price', 'is_per_day']
+    list_filter = ['is_per_day']
+    search_fields = ['title']
 
 
 @admin.register(PricingPlan)
 class PricingPlanAdmin(admin.ModelAdmin):
-    list_display = ['season', 'min_day', 'max_day', 'price_period', 'get_extra_service', 'is_active']
-
-    def get_extra_service(self, obj):
-        titles = [service.title for service in obj.extra_service.all()]
-        return ", ".join(titles) if titles else "нет услуг"
+    """
+    Комплексная панель управления тарифами.
+    Оптимизирована для работы с ManyToMany связями.
+    """
+    list_display = [
+        'car', 'season', 'min_day', 'max_day', 
+        'price_period', 'get_extra_services', 'is_active'
+    ]
+    list_filter = ['is_active', 'season', 'car']
+    list_editable = ['price_period', 'is_active']
+    search_fields = ['car__brand', 'car__model']
     
-    get_extra_service.short_description = "extra_service"
+    # Интерфейс для удобного выбора услуг в карточке
+    filter_horizontal = ['extra_service']
+
+    def get_extra_services(self, obj):
+        """Отображение списка услуг через запятую"""
+        return ", ".join([s.title for s in obj.extra_service.all()]) or "—"
+    
+    get_extra_services.short_description = "Включенные услуги"
 
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related('extra_service')
-
-
-
+        """Оптимизация: подгружаем машину, сезон и услуги одним запросом"""
+        return super().get_queryset(request).select_related('car', 'season').prefetch_related('extra_service')

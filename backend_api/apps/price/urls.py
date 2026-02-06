@@ -1,9 +1,7 @@
 from django.urls import path
-from .views import *
+from .views import PricingPlanView
 
 urlpatterns = [
-    path('pricing-plan/', PricingPlanView.as_view()),
-#     path('booking_cars/', BookCarView.as_view()),
-#     path('cars/', CarView.as_view()),
-#     path('pricing-plan/', PricingPlanView.as_view()),
+    # Список всех активных тарифных планов
+    path('pricing-plans/', PricingPlanView.as_view(), name='pricing-plan-list'),
 ]

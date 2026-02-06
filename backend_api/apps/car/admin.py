@@ -1,17 +1,46 @@
 from django.contrib import admin
-from .models import *
-
+from .models import Car, CarWashOption, BookCar
 
 @admin.register(CarWashOption)
-class CarWishOptionAdmin(admin.ModelAdmin):
-    list_display = ['price_wash']
+class CarWashOptionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'price_wash']
+    list_editable = ['price_wash'] 
 
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    list_dispaly = ['name']
-
+    list_display = ['name', 'brand', 'model', 'year_of_manufacture', 'discount']
+    list_filter = ['brand', 'fuel_type', 'body_car'] 
+    search_fields = ['name', 'brand', 'model']
 
 @admin.register(BookCar)
 class BookCarAdmin(admin.ModelAdmin):
-    list_display = ['car']
+    list_display = [
+        'id', 'user', 'car', 'duration_start', 
+        'duration_end', 'rental_days', 'total_price_snapshot', 'status'
+    ]
+    
+    list_filter = ['duration_start', 'car', 'user', 'status']
+    
+    search_fields = ['user__username', 'car__name']
+    
+    readonly_fields = ['total_price_snapshot', 'call_time']
+    
+    fieldsets = (
+        ('Основная информация', {
+            'fields': ('user', 'car', 'call_time', 'status')
+        }),
+        ('Даты аренды', {
+            'fields': ('duration_start', 'duration_end')
+        }),
+        ('Дополнительные услуги', {
+            'fields': ('child_seat', 'is_wish', 'has_wash_type', 'car_delivery')
+        }),
+        ('Локация', {
+            'fields': ('is_city', 'is_airport')
+        }),
+        ('Финансы', {
+            'fields': ('total_price_snapshot',),
+            'description': 'Цена рассчитывается автоматически при сохранении'
+        }),
+    )
