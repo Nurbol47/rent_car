@@ -1,0 +1,107 @@
+.nature {
+  background-image: url("../pages/caar.png");
+  border-radius: 30px;
+  background-size: cover;
+  font-family: Inter Tight;
+  position: relative;
+  height: 840px;
+}
+
+.hero-content {
+  text-align: center;
+  color: #ffffff;
+  padding: 160px 0;
+
+  h1 {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 45px;
+    letter-spacing: -1%;
+  }
+  p {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: -1%;
+    margin: 20px 0;
+  }
+  button {
+    padding: 20px 30px;
+    border-radius: 30px;
+    background-color: #266ff5;
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: -1%;
+    color: #ffffff;
+    border: none;
+  }
+}
+
+.cardsNat {
+  display: flex;
+  gap: 30px;
+  position: absolute;
+  bottom: -37%;
+  left: 80px;
+}
+
+.cardNat {
+  border-radius: 15px;
+  background-color: #ffffff;
+  padding-bottom: 66px;
+  position: relative;
+  img {
+    width: 460px;
+  }
+  h3 {
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 20px;
+    line-height: 22px;
+    letter-spacing: -1%;
+    color: #3e4757;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+}
+
+.sliderNav {
+  width: 232px;
+  height: 54px;
+  margin: 336px 690px 80px;
+  background: #ffffff;
+  border-radius: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 13px;
+  button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #93a1ba;
+    color: #ffffff;
+    font-size: 20px;
+  }
+}
+
+.dots {
+  display: flex;
+  gap: 10px;
+  span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #aeb8c9;
+  }
+  p {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #3b4a60;
+  }
+}

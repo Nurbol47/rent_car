@@ -1,0 +1,65 @@
+* {
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: Inter Tight;
+}
+
+.container {
+  background-image: url(../pages/car.png);
+  background-size: cover;
+  border-radius: 30px;
+  padding: 40px 80px;
+  h1 {
+    font-weight: 600;
+    font-size: 44px;
+    line-height: 45px;
+    letter-spacing: -1%;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+}
+.cards {
+  display: grid;
+  gap: 20px;
+}
+
+.cardRev {
+  width: 413px;
+  background-color: blue;
+  backdrop-filter: blur(10px);
+  background: var(--glass, #2f519073);
+  border-radius: 16px;
+  padding: 30px 24px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #20315073;
+  img {
+    margin-bottom: 20px;
+  }
+  h3 {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 26px;
+    letter-spacing: -1%;
+    margin-bottom: 20px;
+  }
+  p {
+    font-weight: 500;
+    font-style: Medium;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: -1%;
+    color: var(--grey-md, #dae3f4);
+    width: 360px;
+  }
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}

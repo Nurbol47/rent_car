@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import RoutePage from "./pages/RoutePage";
 import Footer from "./componants/footer/footer copy";
 import Header from "./componants/header/header";
+import Reviews from "./componants/reviews";
+import Company from "./componants/revСompany";
+import Nature from "./componants/natr/nature";
 
 function App() {
   return (
