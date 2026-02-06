@@ -71,8 +71,8 @@ function CarCard() {
             <button className="car-btn">Забронировать</button>
           </div>
         </div>
-
        </div>
+       <a href="#" className="show">Показать больше ▼</a>
       </div>
     </section>
   );

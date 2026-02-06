@@ -156,3 +156,17 @@
     border-radius: 50%;
   }
 }
+
+.show {
+  max-width: 212px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  font-weight: 500;
+  font-size: 18px;
+  color: #93A1BA;
+  border-radius: 1000px;
+  text-decoration: none;
+  padding: 16px 20px;
+  margin-top: 40px;
+}
