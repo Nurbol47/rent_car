@@ -7,18 +7,20 @@ import Header from "./componants/header/header";
 import Reviews from "./componants/reviews";
 import Company from "./componants/revСompany";
 import Nature from "./componants/natr/nature";
+import Card from "./componants/carCard/carCard"
 
 function App() {
   return (
     <Router>
       <Header />
+      <Reviews/>
+      <Company/>
+      <Nature/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/route-details" element={<RoutePage />} />
       </Routes>
-      <Reviews/>
-      <Company/>
-      <Nature/>
+      <Card/>
       <Footer />
     </Router>
   );
