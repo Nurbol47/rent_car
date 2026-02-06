@@ -1,16 +1,15 @@
-import BackgroundSlider from "../backgroundSlider/backgroundSlider"
-import BookingForm from "../bookingForm/bookingForm"
-import SliderControls from "../sliderControls/sliderControls"
+import BackgroundSlider from "../backgroundSlider/backgroundSlider";
+import BookingForm from "../bookingForm/bookingForm";
+import SliderControls from "../sliderControls/sliderControls";
 import { useState } from "react";
-import "./style.css"
+import "./style.css";
 
 export default function Hero() {
-      const [currentSlide, setCurrentSlide] = useState(0);
-    
-    return (
-        <>
-       <div className="home-page">
+  const [currentSlide, setCurrentSlide] = useState(0);
 
+  return (
+    <>
+      <div className="home-page">
         <div className="fon">
           <BackgroundSlider currentSlide={currentSlide} />
 
@@ -28,6 +27,6 @@ export default function Hero() {
           </main>
         </div>
       </div>
-        </>
-    )
+    </>
+  );
 }

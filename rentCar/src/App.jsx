@@ -16,6 +16,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/route-details" element={<RoutePage />} />
       </Routes>
+      <Reviews/>
+      <Company/>
+      <Nature/>
       <Footer />
     </Router>
   );

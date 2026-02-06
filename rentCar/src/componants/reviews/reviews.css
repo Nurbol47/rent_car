@@ -1,14 +1,11 @@
-* {
-  margin: 0 auto;
-  box-sizing: border-box;
-  font-family: Inter Tight;
-}
-
 .container {
   background-image: url(../pages/car.png);
   background-size: cover;
   border-radius: 30px;
   padding: 40px 80px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   h1 {
     font-weight: 600;
     font-size: 44px;
@@ -19,24 +16,23 @@
     margin-bottom: 40px;
   }
 }
+
 .cards {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
 .cardRev {
-  width: 413px;
-  background-color: blue;
+  max-width: 413px;
   backdrop-filter: blur(10px);
-  background: var(--glass, #2f519073);
+  background: rgba(18, 33, 61, 0.45);
   border-radius: 16px;
   padding: 30px 24px;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
-  backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background-color: #20315073;
   img {
     margin-bottom: 20px;
   }
@@ -45,21 +41,18 @@
     font-weight: 600;
     font-size: 22px;
     line-height: 26px;
-    letter-spacing: -1%;
     margin-bottom: 20px;
   }
   p {
     font-weight: 500;
-    font-style: Medium;
     font-size: 18px;
     line-height: 22px;
-    letter-spacing: -1%;
-    color: var(--grey-md, #dae3f4);
-    width: 360px;
+    color: #dae3f4;
+    max-width: 360px;
   }
 }
 
-.card:hover {
+.cardRev:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
