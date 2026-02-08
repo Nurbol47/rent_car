@@ -13,14 +13,14 @@ function App() {
   return (
     <Router>
       <Header />
-      <Reviews/>
-      <Company/>
-      <Nature/>
+      {/* <Reviews/> */}
+      {/* <Company/> */}
+      {/* <Nature/> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/route-details" element={<RoutePage />} />
       </Routes>
-      <Card/>
+      {/* <Card/> */}
       <Footer />
     </Router>
   );

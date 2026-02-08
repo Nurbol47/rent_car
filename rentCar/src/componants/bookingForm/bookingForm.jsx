@@ -38,7 +38,7 @@ function BookingForm() {
           </select>
           <input type="checkbox" className="check" />
         </div>
-        <div>
+        <div className="Avtoo">
           <h6>подача авто</h6> <IoHelpCircleOutline className="icon1" />{" "}
           <input type="checkbox" />
         </div>
