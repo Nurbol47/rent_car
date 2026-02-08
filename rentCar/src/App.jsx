@@ -15,7 +15,7 @@ function App() {
       <Header />
       <Reviews/>
       <Company/>
-      <Nature/>
+      {/* <Nature/> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/route-details" element={<RoutePage />} />

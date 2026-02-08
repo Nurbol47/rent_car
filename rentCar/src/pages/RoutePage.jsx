@@ -16,9 +16,9 @@ const RoutePage = () => {
         <h1 className="page-title">Заповедная бурятия</h1>
 
         <section className="new-cards-grid">
-          <div className="placeholder-card">Твоя новая карточка 1</div>
-          <div className="placeholder-card">Твоя новая карточка 2</div>
-          <div className="placeholder-card">Твоя новая карточка 3</div>
+          <div className="placeholder-card">Новая карточка 1</div>
+          <div className="placeholder-card">Новая карточка 2</div>
+          <div className="placeholder-card">Новая карточка 3</div>
         </section>
       </div>
     </main>

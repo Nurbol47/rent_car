@@ -8,7 +8,7 @@
 /* Верхний баннер с закруглением */
 .hero-banner {
   background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
-              url('myimg.png') center/cover no-repeat; /* СЮДА ФОТО МАШИНЫ И ГОР */
+              url('/pages/caar.png') center/cover no-repeat; /* СЮДА ФОТО МАШИНЫ И ГОР */
   height: 600px;
   border-radius:40px; /* Закругление только снизу */
   display: flex;
