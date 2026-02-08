@@ -1,5 +1,5 @@
 .containerCard{
-  margin: 100px;
+  /* margin: 100px; */
   h1 {
     font-weight: 600;
     font-size: 44px;
@@ -11,11 +11,12 @@
 
 .carCards{
   display: flex;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
 .car-card {
-  max-width: 414px;
+  max-width: 387px;
   background: #fff;
   backdrop-filter: blur(10px);
   padding-bottom: 130px;
@@ -25,7 +26,7 @@
   font-family: Inter Tight;
   margin-top: 20px;
   img {
-    width: 413px;
+    width: 387px;
     border-radius: 15px;
   }
 }
@@ -48,6 +49,7 @@
   font-weight: 500;
   font-size: 18px;
   color: #3e4757;
+  justify-content: center;
 }
 
 .yellow1 {
@@ -62,6 +64,7 @@
   font-weight: 500;
   font-size: 18px;
   color: #3e4757;
+  justify-content: center;
 }
 
 .car-title {
@@ -97,7 +100,7 @@
   background: #fff;
   color: #93a1ba;
   border: 1px solid #93a1ba;
-  padding: 16px 123px;
+  padding: 16px 112px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
@@ -106,7 +109,7 @@
   min-width: 140px;
 }
 .car-btn:hover{
-  background-color: #93a1ba;
+  background-color: #266FF5;
   color: #fff;
 }
 
@@ -140,6 +143,9 @@
   padding: 14px 15px;
   display: flex;
   gap: 6px;
+  display: flex;
+  justify-content: center;
+  margin-left: 120px;
 
   position: relative;
   bottom: 55px;
@@ -170,3 +176,9 @@
   padding: 16px 20px;
   margin-top: 40px;
 }
+.swov {
+  display: flex;
+  justify-content: center;
+}
+
+

@@ -1,15 +1,17 @@
 import "./Home.css";
-import RoutesSection from "../componants/priroda/priroda";
-import Privileges from "../componants/privileg/privileges";
-import RentSteps from "../componants/navi/navi";
-import TrustSection from "../componants/rentSteps/rentSteps";
+import RoutesSection from "../components/priroda/priroda";
+import Privileges from "../components/privileg/privileges";
+import RentSteps from "../components/navi/navi";
+import TrustSection from "../components/rentSteps/rentSteps";
 
-import Hero from "../componants/hero/hero";
+import Hero from "../components/hero/hero";
+import CarCard from "../components/carCard/carCard";
 
 function Home() {
   return (
     <>
       <Hero />
+      <CarCard/>
       <TrustSection />
       <RoutesSection/>
       <RentSteps />
