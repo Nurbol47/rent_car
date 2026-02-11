@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Banner, Benefit, Comment, Contact
+from .models import Banner, Comment
 
 class BannerSerializer(serializers.ModelSerializer):
     """Сериализатор для рекламных баннеров на главной странице"""
@@ -7,12 +7,6 @@ class BannerSerializer(serializers.ModelSerializer):
         model = Banner
         fields = ['id', 'title', 'short_description', 'img', 'ordering']
 
-
-class BenefitSerializer(serializers.ModelSerializer):
-    """Сериализатор преимуществ компании"""
-    class Meta:
-        model = Benefit
-        fields = ['id', 'icon', 'title', 'description']
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -35,12 +29,3 @@ class CommentSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(obj.img.url)
         return None
 
-
-class ContactSerializer(serializers.ModelSerializer):
-    """Сериализатор контактной информации и ссылок на соцсети"""
-    class Meta:
-        model = Contact
-        fields = [
-            'id', 'full_name', 'phone_number', 'email', 
-            'address', 'instagram', 'whatsapp', 'telegram'
-        ]

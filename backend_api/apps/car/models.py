@@ -22,11 +22,29 @@ class Car(models.Model):
     model = models.CharField("Модель", max_length=150)
     seating = models.PositiveIntegerField("Посадочные места", default=0)
     engine_power = models.FloatField("Мощность двигателя")
+
+    color = models.CharField("Цвет", max_length=50, blank=True)
+    drive_unit = models.CharField("Привод", max_length=50, blank=True) # Например: AWD, RWD, FWD
+   
     fuel_type = models.CharField("Вид топлива", choices=FUEL_CHOICES, default='petrol')
     body_car = models.CharField("Кузов", max_length=150)
+    duration_start = models.DateField("Дата начала")
+    duration_end = models.DateField("Дата конца")
     year_of_manufacture = models.PositiveIntegerField("Год выпуска")
     discount = models.PositiveIntegerField("Скидка (%)", default=0)
     pledge = models.DecimalField("Залог", decimal_places=2, max_digits=10, default=0)
+
+    def get_current_price(self):
+        """Возвращает базовую цену из активного плана"""
+        active_plan = self.plans.filter(is_active=True).first()
+        return active_plan.price_period if active_plan else 0
+
+    def get_discounted_price(self):
+        """Возвращает цену с учетом скидки"""
+        price = self.get_current_price()
+        if self.discount > 0:
+            return int(float(price) * (1 - self.discount / 100))
+        return price
 
     def save(self, *args, **kwargs):
         # Автоматическое формирование полного названия при сохранении
@@ -66,7 +84,7 @@ class BookCar(models.Model):
     
     duration_start = models.DateField("Дата начала")
     duration_end = models.DateField("Дата конца")
-    
+ 
     status = models.CharField("Статус", max_length=20, choices=STATUS_CHOICES, default='pending')
     
     # Фиксируем цену на момент бронирования, чтобы изменения в тарифах не влияли на старые заказы
@@ -77,8 +95,8 @@ class BookCar(models.Model):
     is_wish = models.BooleanField("Нужна мойка", default=True)
     car_delivery = models.BooleanField("Подача авто", default=False)
     call_time = models.DateTimeField("Время создания заявки", auto_now_add=True)
-    is_city = models.BooleanField("По городу", default=True)
-    is_airport = models.BooleanField("В аэропорт", default=False)
+    is_city = models.BooleanField("По городу", default=True, null=True, blank=True)
+    is_airport = models.BooleanField("В аэропорт", default=False, null=True, blank=True)
 
     @property
     def rental_days(self):
@@ -139,3 +157,19 @@ class BookCar(models.Model):
     class Meta:
         verbose_name = "Бронирование"
         verbose_name_plural = "Бронирования"
+
+
+class UserModel(models.Model):
+    booking = models.OneToOneField(BookCar, on_delete=models.CASCADE, related_name="contact_info", verbose_name="Бронирование")
+
+    full_name = models.CharField("ФИО", max_length=150)
+    phone = models.CharField("Телефон", max_length=20)
+
+    agreement = models.BooleanField("Согласие на обработку персональных данных", default=False)
+
+    class Meta:
+        verbose_name = "Данные клиента"
+        verbose_name_plural = "Данные клиентов"
+
+    def __str__(self):
+        return f"{self.full_name} ({self.phone})"

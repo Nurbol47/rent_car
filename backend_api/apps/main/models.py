@@ -22,22 +22,6 @@ class Banner(models.Model):
         ordering = ['ordering', 'id']
 
 
-class Benefit(models.Model):
-    """
-    Преимущества компании (УТП). 
-    Иконки рекомендуется загружать в формате SVG (FileField).
-    """
-    icon = models.FileField("Иконка (SVG/PNG)", upload_to="main_icons/")
-    title = models.CharField("Заголовок", max_length=150)
-    description = models.TextField("Описание", null=True, blank=True)
-
-    def __str__(self):
-        return self.title
-    
-    class Meta:
-        verbose_name = "Преимущество"
-        verbose_name_plural = "Преимущества"
-
 
 class Comment(models.Model):
     """
@@ -68,24 +52,3 @@ class Comment(models.Model):
         ordering = ['-created_at']
 
 
-class Contact(models.Model):
-    """
-    Контактная информация и ссылки на социальные сети.
-    Обычно используется в единственном экземпляре (Singleton).
-    """
-    full_name = models.CharField("Название организации/ФИО", max_length=150)
-    phone_number = models.CharField("Контактный телефон", max_length=20)
-    email = models.EmailField("Email для связи", null=True, blank=True)
-    address = models.CharField("Адрес офиса", max_length=250)
-    
-    # Ссылки на соцсети
-    instagram = models.URLField("Ссылка Instagram", null=True, blank=True)
-    whatsapp = models.URLField("Ссылка WhatsApp", null=True, blank=True)
-    telegram = models.URLField("Ссылка Telegram", null=True, blank=True)
-
-    def __str__(self):
-        return self.full_name
-
-    class Meta:
-        verbose_name = "Контактные данные"
-        verbose_name_plural = "Контактные данные"

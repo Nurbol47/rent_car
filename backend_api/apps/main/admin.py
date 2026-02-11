@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from .models import Banner, Benefit, Comment, Contact
+from .models import Banner, Comment
 
 @admin.register(Banner)
 class BannerAdmin(admin.ModelAdmin):
@@ -19,19 +19,6 @@ class BannerAdmin(admin.ModelAdmin):
     preview.short_description = "Миниатюра"
 
 
-@admin.register(Benefit)
-class BenefitAdmin(admin.ModelAdmin):
-    """Управление списком преимуществ (УТП)"""
-    list_display = ['preview_icon', 'title']
-
-    def preview_icon(self, obj):
-        """Отображение иконки преимущества"""
-        if obj.icon:
-            return mark_safe(f'<img src="{obj.icon.url}" style="max-height: 30px;">')
-        return "—"
-    
-    preview_icon.short_description = "Иконка"
-
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
@@ -48,11 +35,3 @@ class CommentAdmin(admin.ModelAdmin):
     get_short_comment.short_description = "Текст отзыва"
 
 
-@admin.register(Contact)
-class ContactAdmin(admin.ModelAdmin):
-    """Управление контактными данными организации"""
-    list_display = ['full_name', 'phone_number', 'email', 'address']
-    
-    # Запрещаем создание более чем одной записи, если это Singleton
-    def has_add_permission(self, request):
-        return not Contact.objects.exists()

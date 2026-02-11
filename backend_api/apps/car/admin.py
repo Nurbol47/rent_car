@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Car, CarWashOption, BookCar
+from .models import Car, CarWashOption, BookCar, UserModel
 
 @admin.register(CarWashOption)
 class CarWashOptionAdmin(admin.ModelAdmin):
@@ -9,7 +9,7 @@ class CarWashOptionAdmin(admin.ModelAdmin):
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    list_display = ['name', 'brand', 'model', 'year_of_manufacture', 'discount']
+    list_display = ['name', 'brand', 'model', 'color', 'drive_unit', 'body_car', 'year_of_manufacture', 'discount']
     list_filter = ['brand', 'fuel_type', 'body_car'] 
     search_fields = ['name', 'brand', 'model']
 
@@ -44,3 +44,12 @@ class BookCarAdmin(admin.ModelAdmin):
             'description': 'Цена рассчитывается автоматически при сохранении'
         }),
     )
+
+
+@admin.register(UserModel)
+class UserModelAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'phone', 'agreement')
+    
+    list_display_links = ('full_name',)
+    
+    list_filter = ('agreement',)

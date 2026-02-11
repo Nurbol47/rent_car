@@ -1,15 +1,34 @@
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-from .models import Car, BookCar
-from .serializers import CarSerializer, BookCarSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from .filters import CarFilter
+from .models import Car, BookCar, UserModel
+from .serializers import CarSerializer, CarDetailSerializer, BookCarSerializer, UserModelSerializer
 
 class CarView(generics.ListAPIView):
     """
     Представление для получения полного списка автомобилей.
     Возвращает список всех машин, отсортированный по марке и модели.
     """
-    queryset = Car.objects.all().order_by('brand', 'model')
+    queryset = Car.objects.all()
     serializer_class = CarSerializer
+    
+    # Подключаем бэкенды фильтрации и сортировки
+    filter_backends = [
+        DjangoFilterBackend, 
+        filters.OrderingFilter, 
+        filters.SearchFilter
+    ]
+    
+    # Привязываем наш кастомный фильтр
+    filterset_class = CarFilter
+    
+    # Настраиваем сортировку (для кнопок "Дороже", "Дешевле", "Со скидкой")
+    ordering_fields = ['discount', 'year_of_manufacture'] 
+    
+    def get_queryset(self):
+        # Оставляем базовую сортировку, если фильтры не применены
+        return super().get_queryset().order_by('brand', 'model')
 
 
 class CarDetailView(generics.RetrieveAPIView):
@@ -18,7 +37,7 @@ class CarDetailView(generics.RetrieveAPIView):
     Используется для страницы автомобиля (поиск по ID/Primary Key).
     """
     queryset = Car.objects.all()
-    serializer_class = CarSerializer
+    serializer_class = CarDetailSerializer
 
 
 class BookCarView(generics.ListCreateAPIView):
@@ -28,7 +47,6 @@ class BookCarView(generics.ListCreateAPIView):
     - POST: Создает новую заявку на бронирование.
     """
     serializer_class = BookCarSerializer
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         """
@@ -37,11 +55,9 @@ class BookCarView(generics.ListCreateAPIView):
         """
         return BookCar.objects.filter(
             user=self.request.user
-        ).select_related('car').order_by('-call_time')
-    
-    def perform_create(self, serializer):
-        """
-        Автоматически назначает текущего пользователя владельцем бронирования
-        в процессе сохранения объекта.
-        """
-        serializer.save(user=self.request.user)
+        ).select_related('car').prefetch_related('contact_info').order_by('-call_time')
+
+
+class UserModelView(generics.ListCreateAPIView):
+    queryset = UserModel.objects.all()
+    serializer_class = UserModelSerializer
