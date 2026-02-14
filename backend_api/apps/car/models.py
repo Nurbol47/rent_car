@@ -3,6 +3,19 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db.models import Sum, Q
 
+
+class ImgCar(models.Model):
+    img = models.ImageField("Изображение", upload_to='img_car/')
+    car = models.ForeignKey('Car', on_delete=models.CASCADE, related_name='img', verbose_name="Машина")
+
+    class Meta:
+        verbose_name = "Изображение"
+        verbose_name_plural = "Изображения"
+
+    def __str__(self):
+        return str(self.img.name)
+
+
 class Car(models.Model):
     """
     Модель транспортного средства.
@@ -17,7 +30,6 @@ class Car(models.Model):
     ]
 
     name = models.CharField("Название", max_length=150, blank=True)
-    img = models.ImageField("Изображение", upload_to='img_car/')
     brand = models.CharField("Марка", max_length=150)
     model = models.CharField("Модель", max_length=150)
     seating = models.PositiveIntegerField("Посадочные места", default=0)

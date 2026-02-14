@@ -1,13 +1,19 @@
 from rest_framework import generics
-from .models import Location
-from .serializers import LocationSerializer, LocationDetailSerializer
+from .models import Location, BaseLocation
+from .serializers import LocationSerializer, LocationDetailSerializer, CharacteristicSerializer, BaseLocationSerializer
+
+
+class BaseLocationView(generics.ListAPIView):
+    queryset = BaseLocation.objects.all()
+    serializer_class = BaseLocationSerializer
+
 
 class LocationView(generics.ListAPIView):
     """
     Список локаций (краткая информация). 
     Используется для начального отображения доступных офисов.
     """
-    queryset = Location.objects.all()
+    queryset = Location.objects.all().prefetch_related('img')
     serializer_class = LocationSerializer
 
 
@@ -18,5 +24,5 @@ class LocationDetailView(generics.RetrieveAPIView):
     вложенных характеристик и списка машин.
     """
     # prefetch_related объединяет запросы к ManyToMany и ForeignKey в один эффективный SQL-запрос
-    queryset = Location.objects.all().prefetch_related('characteristics', 'cars')
+    queryset = Location.objects.all().prefetch_related('characteristics', 'cars', 'img')
     serializer_class = LocationDetailSerializer

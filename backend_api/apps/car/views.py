@@ -10,7 +10,7 @@ class CarView(generics.ListAPIView):
     Представление для получения полного списка автомобилей.
     Возвращает список всех машин, отсортированный по марке и модели.
     """
-    queryset = Car.objects.all()
+    queryset = Car.objects.all().prefetch_related('img')
     serializer_class = CarSerializer
     
     # Подключаем бэкенды фильтрации и сортировки
@@ -36,7 +36,7 @@ class CarDetailView(generics.RetrieveAPIView):
     Представление для получения детальной информации о конкретном автомобиле.
     Используется для страницы автомобиля (поиск по ID/Primary Key).
     """
-    queryset = Car.objects.all()
+    queryset = Car.objects.all().prefetch_related('img')
     serializer_class = CarDetailSerializer
 
 

@@ -1,6 +1,13 @@
 from rest_framework import serializers
 from django.db import transaction
-from .models import Car, CarWashOption, BookCar, UserModel
+from .models import Car, CarWashOption, BookCar, UserModel, ImgCar
+
+
+class ImgCarSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImgCar
+        fields = ['img']
+
 
 class CarSerializer(serializers.ModelSerializer):
     """
@@ -10,10 +17,10 @@ class CarSerializer(serializers.ModelSerializer):
     old_price = serializers.IntegerField(source='get_current_price', read_only=True)
     total_price = serializers.IntegerField(source='get_discounted_price', read_only=True)
     promo_period = serializers.SerializerMethodField()
+    img = ImgCarSerializer(many=True, read_only=True)
 
     class Meta:
         model = Car
-        fields = ['id', 'name', 'img', 'discount', 'old_price', 'duration_start', 'duration_end', 'total_price', 'promo_period']
         fields = [
             'id', 'name', 'img', 'discount', 'old_price', 
             'duration_start', 'duration_end', 'total_price', 'promo_period',
@@ -36,6 +43,7 @@ class CarDetailSerializer(serializers.ModelSerializer):
     """
     old_price = serializers.IntegerField(source='get_current_price', read_only=True)
     total_price = serializers.IntegerField(source='get_discounted_price', read_only=True)
+    img = ImgCarSerializer(many=True, read_only=True)
 
     class Meta:
         model = Car
@@ -50,7 +58,8 @@ class CarDetailSerializer(serializers.ModelSerializer):
 class UserModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
-        fields = ['id', 'full_name', 'phone', 'agreement'] 
+        fields = ['id', 'full_name', 'phone', 'agreement', 'booking']
+        extra_kwargs = {'booking': {'required': False}}
 
     def validate_agreement(self, value):
         if not value:
@@ -71,7 +80,7 @@ class BookCarSerializer(serializers.ModelSerializer):
     # Автоматическая привязка текущего авторизованного пользователя
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
-    contact_info = UserModelSerializer()
+    contact_info = UserModelSerializer(required=False)
     
     car_id = serializers.PrimaryKeyRelatedField(
         queryset=Car.objects.all(), 
@@ -107,6 +116,9 @@ class BookCarSerializer(serializers.ModelSerializer):
         start = attrs.get('duration_start')
         end = attrs.get('duration_end')
         car = attrs.get('car')  # Получаем объект машины из source='car'
+        
+        if not car and self.instance:
+            car = self.instance.car
 
         if start and end:
             if start >= end:
@@ -132,12 +144,13 @@ class BookCarSerializer(serializers.ModelSerializer):
         return attrs
 
     def create(self, validated_data):
-        contact_data = validated_data.pop('contact_info')
+        contact_data = validated_data.pop('contact_info', None)
         
         with transaction.atomic():
             booking = BookCar.objects.create(**validated_data)
             
-            UserModel.objects.create(booking=booking, **contact_data)
+            if contact_data:
+                UserModel.objects.create(booking=booking, **contact_data)
             
         return booking
     

@@ -1,5 +1,13 @@
 from django.contrib import admin
-from .models import Car, CarWashOption, BookCar, UserModel
+from .models import Car, CarWashOption, BookCar, UserModel, ImgCar
+from .inlines import ImgCarInline
+
+
+@admin.register(ImgCar)
+class ImgCarAdmin(admin.ModelAdmin):
+    list_display = ['id', 'img', 'car']
+    list_filter = ['car']
+
 
 @admin.register(CarWashOption)
 class CarWashOptionAdmin(admin.ModelAdmin):
@@ -12,6 +20,8 @@ class CarAdmin(admin.ModelAdmin):
     list_display = ['name', 'brand', 'model', 'color', 'drive_unit', 'body_car', 'year_of_manufacture', 'discount']
     list_filter = ['brand', 'fuel_type', 'body_car'] 
     search_fields = ['name', 'brand', 'model']
+    inlines = [ImgCarInline]
+    
 
 @admin.register(BookCar)
 class BookCarAdmin(admin.ModelAdmin):
