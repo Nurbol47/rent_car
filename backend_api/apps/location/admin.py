@@ -11,13 +11,13 @@ class BaseLocationAdmin(admin.ModelAdmin):
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    list_display = ['title', 'description']
+    list_display = ['title', 'short_description']
     inlines = [CharacteristicInline, ImgLocationInline]
     filter_horizontal = ['cars']
 
-    def description(self, obj):
+    def short_description(self, obj):
         return Truncator(obj.description).chars(100)
-    description.short_description = 'Описание'
+    short_description.short_description = 'Описание'
 
 
 @admin.register(Characteristic)

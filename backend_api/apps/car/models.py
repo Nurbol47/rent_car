@@ -77,6 +77,10 @@ class CarWashOption(models.Model):
 
     def __str__(self):
         return f"{self.price_wash}"
+    
+    class Meta:
+        verbose_name = "Тип мойки"
+        verbose_name_plural = "Типы мойки"
 
 
 class BookCar(models.Model):

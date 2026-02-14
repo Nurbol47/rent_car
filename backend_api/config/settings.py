@@ -15,6 +15,7 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -89,7 +90,65 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+JAZZMIN_SETTINGS = {
+    "site_title": "Rent Car Admin",
+ 
+    "site_header": "Аренда Автомобилей",
+    
+    "site_brand": "RentCar Dashboard",
 
+    "welcome_sign": "Добро пожаловать в систему управления прокатом",
+
+    "copyright": "Rent Car Ltd",
+
+    "search_model": ["auth.User", "your_app.Car"], 
+}
+
+JAZZMIN_SETTINGS = {
+    "topmenu_links": [
+        {"name": "Главная", "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"model": "auth.User"},
+    ],
+    
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    
+    # Иконки для разделов (используйте Font Awesome 5)
+    "icons": {
+        # Раздел CAR
+        "car.CarWashOption": "fas fa-shower",
+        "car.BookCar": "fas fa-calendar-check",
+        "car.UserModel": "fas fa-user-tag",
+        "car.ImgCar": "fas fa-images",
+        "car.Car": "fas fa-car",
+
+        # Раздел LOCATION
+        "location.BaseLocation": "fas fa-map-marked-alt",
+        "location.ImgLocation": "fas fa-camera-retro",
+        "location.Location": "fas fa-star",
+        "location.Characteristic": "fas fa-list-ul",
+
+        # Раздел MAIN
+        "main.Banner": "fas fa-ad",
+        "main.Comment": "fas fa-comments",
+
+        # Раздел PRICE
+        "price.ExtraService": "fas fa-plus-circle",
+        "price.Season": "fas fa-cloud-sun",
+        "price.PricingPlan": "fas fa-money-check-alt",
+        
+        # Системные
+        "auth.User": "fas fa-users",
+        "auth.Group": "fas fa-user-shield",
+    },
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "show_ui_builder": True,
+    
+    "theme": "flatly", 
+    "dark_mode_theme": "darkly",
+}
 
 LANGUAGE_CODE = 'en-us'
 
