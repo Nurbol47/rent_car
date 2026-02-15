@@ -101,10 +101,8 @@ JAZZMIN_SETTINGS = {
 
     "copyright": "Rent Car Ltd",
 
-    "search_model": ["auth.User", "your_app.Car"], 
-}
+    "search_model": ["auth.User", "apps.car"], 
 
-JAZZMIN_SETTINGS = {
     "topmenu_links": [
         {"name": "Главная", "url": "admin:index", "permissions": ["auth.view_user"]},
         {"model": "auth.User"},
@@ -141,6 +139,8 @@ JAZZMIN_SETTINGS = {
         "auth.User": "fas fa-users",
         "auth.Group": "fas fa-user-shield",
     },
+
+    "changeform_format": "single",
 }
 
 JAZZMIN_UI_TWEAKS = {    
