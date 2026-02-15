@@ -59,5 +59,10 @@ class BookCarView(generics.ListCreateAPIView):
 
 
 class UserModelView(generics.ListCreateAPIView):
+    """
+    Работа с контактными данными пользователей.
+    Позволяет создавать записи с информацией о клиенте (ФИО, телефон) 
+    при бронировании и просматривать существующие данные.
+    """
     queryset = UserModel.objects.all()
     serializer_class = UserModelSerializer

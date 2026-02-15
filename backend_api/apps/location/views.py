@@ -4,6 +4,10 @@ from .serializers import LocationSerializer, LocationDetailSerializer, Character
 
 
 class BaseLocationView(generics.ListAPIView):
+    """
+    Список базовых локаций (регионов).
+    Служит для фильтрации основных локаций.
+    """
     queryset = BaseLocation.objects.all()
     serializer_class = BaseLocationSerializer
 
